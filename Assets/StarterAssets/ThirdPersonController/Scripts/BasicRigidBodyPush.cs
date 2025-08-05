@@ -18,7 +18,7 @@ public class BasicRigidBodyPush : MonoBehaviour
 		// make sure we hit a non kinematic rigidbody
 		Rigidbody body = hit.collider.attachedRigidbody;
 		if (body == null || body.isKinematic) return;
-
+		Debug.Log("Pushing rigidbody: " + body.name);
 		// make sure we only push desired layer(s)
 		var bodyLayerMask = 1 << body.gameObject.layer;
 		if ((bodyLayerMask & pushLayers.value) == 0) return;

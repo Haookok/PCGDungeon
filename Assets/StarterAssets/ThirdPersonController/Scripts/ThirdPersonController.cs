@@ -1,5 +1,4 @@
-﻿ using TMPro.EditorUtilities;
- using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -75,6 +74,7 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+    
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -112,7 +112,9 @@ namespace StarterAssets
         public float ComboWindow = 0.3f;
         private int _currentAttackCount = 0;
         public int MaxComboCount = 2; // 最大连击次数
-        
+            
+        public float attackCooldown = 1.3f;
+        private float lastAttackTime = 0f;
         
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -427,11 +429,19 @@ namespace StarterAssets
             }
         }
 
+        private bool canAttack()
+        {
+            return Time.time >= lastAttackTime + attackCooldown;
+        }
+        
         private void Attack()
         {
+            if (!canAttack())
+                return;
             //监测鼠标左键是否按下，按下则触发攻击动画
             if (_hasAnimator && Input.GetMouseButtonDown(0) && !_isAttacking && Grounded)
             {
+                lastAttackTime = Time.time; // 记录攻击时间
                 //不连击，只进行单次攻击
                 _isAttacking = true;
                 _input.jump = false;
@@ -447,6 +457,7 @@ namespace StarterAssets
             
             if(_hasAnimator && Input.GetMouseButtonDown(1) && !_isAttacking && Grounded)
             {
+                lastAttackTime = Time.time; // 记录攻击时间
                 //如果按下鼠标右键，则触发另一个攻击
                 Debug.Log("鼠标右键按下");
                 _isAttacking = true;
