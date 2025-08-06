@@ -471,7 +471,7 @@ namespace StarterAssets
                 StartCoroutine(ResetAttackState()); // 启动协程，重置攻击状态
             }
             
-            //如果按下键位E，则释放大招
+            /*//如果按下键位E，则释放大招
             if(_hasAnimator && Input.GetKeyDown(KeyCode.E) && !_isAttacking && Grounded)
             {
                 Debug.Log("E按下");
@@ -486,7 +486,7 @@ namespace StarterAssets
                 Vector3 step = transform.forward * 2.0f; // 向前移动0.5米
                 _controller.Move(step); // 移动角色
                 StartCoroutine(ResetAttackState2()); // 启动协程，重置攻击状态
-            }
+            }*/
 
         }
         
