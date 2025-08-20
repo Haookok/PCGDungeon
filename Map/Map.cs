@@ -256,8 +256,10 @@ namespace ooparts.dungen
 
             for (int i = 0; i < RoomCount * RoomCount; i++)
             {
-                IntVector2 size = new IntVector2(Random.Range(RoomSize.Min, RoomSize.Max + 1), Random.Range(RoomSize.Min, RoomSize.Max + 1));
-                IntVector2 coordinates = new IntVector2(Random.Range(1, MapSize.x - size.x), Random.Range(1, MapSize.z - size.z));
+                IntVector2 size = new IntVector2(Random.Range(RoomSize.Min, RoomSize.Max + 1)
+                    , Random.Range(RoomSize.Min, RoomSize.Max + 1));
+                IntVector2 coordinates = new IntVector2(Random.Range(1, MapSize.x - size.x)
+                    , Random.Range(1, MapSize.z - size.z));
                 if (!IsOverlapped(size, coordinates))
                 {
                     RoomType roomType = DetermineRoomType(roomIndex);
